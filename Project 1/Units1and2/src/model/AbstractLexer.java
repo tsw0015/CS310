@@ -13,7 +13,7 @@ public abstract class AbstractLexer {
 	 */
 	public static enum Token {
 		LET_KEYWORD,	// regex /let/i
-		EQUAL,			// regex /=/
+		EQUAL,			// regex /=/	
 		COMMA,			// regex /,/
 		EVAL_KEYWORD,	// regex /eval/i
 		QUESTION,		// regex /\?/
