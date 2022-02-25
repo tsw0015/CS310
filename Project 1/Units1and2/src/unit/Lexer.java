@@ -11,7 +11,7 @@ public class Lexer extends model.AbstractLexer {
 		// TODO: implement this method stub
 		S = sentence;
 		i = 0;
-		//throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Lexer extends model.AbstractLexer {
 			TOKEN = Token.FALSE_LITERAL;
 			i++;
 		}
-		
+
 		//TODO Check for trailing characters that would cause the token to be variable name not keyword
 		//TODO Increment i correct number of space
 		//TODO handle mixed cases where var name begins with part of keyword but changes
@@ -99,9 +99,21 @@ public class Lexer extends model.AbstractLexer {
 		}
 		else if(S[i] >= 'a' && S[i] <= 'z') {
 			TOKEN = Token.VARIABLE_NAME;
-			i++;
-		}
 
-		//throw new UnsupportedOperationException();
+			int len = 1;
+			while(	i+len < S.length && 
+					S[i+1] >= 'A' && S[i+len] <= 'Z' ||
+					S[i+1] >= 'a' && S[i+len] <= 'z'
+					) len++;
+
+			LEXEME = new char [len];
+			for (int j = 0; j < len; j++)
+				LEXEME[j] = S[i+j];
+
+			i+= len;
+		}
+		else {
+			throw new UnsupportedOperationException("Unexpected: " + S[i]);
+		}
 	}
 }
