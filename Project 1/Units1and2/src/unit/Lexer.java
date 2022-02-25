@@ -68,7 +68,7 @@ public class Lexer extends model.AbstractLexer {
 		
 		//TODO Check for trailing characters that would cause the token to be variable name not keyword
 		//TODO Increment i correct number of space
-		//TODO handle mixed chases where var name begins with part of keyword but changes
+		//TODO handle mixed cases where var name begins with part of keyword but changes
 		else if(S[i] == 'l' || S[i] == 'L' ) {
 			if(i+1 < S.length && S[i+1] == 'e' || S[i+1] == 'E') {
 				if(i+2 < S.length && S[i+2] == 't') {
@@ -85,7 +85,7 @@ public class Lexer extends model.AbstractLexer {
 					if(i+3 < S.length && S[i+3] == 'l' || S[i+1] == 'L') {
 						if(i+4 < S.length && S[i+4] == ' ' || S[i+4] == '	' || S[i+4] == '\n') {
 							TOKEN = Token.EVAL_KEYWORD;
-							i+=3;
+							i+=4;
 						}
 					}
 				}
