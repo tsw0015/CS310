@@ -2,13 +2,16 @@ use std::io;
 
 fn main() {
 
-    let mut cuts = String::new();
-    let mut dimensions = String::new();
+   let mut cuts = String::new();
+   let mut dimensions = String::new();
    println!("What is the number of cuts you want to use?");
    io::stdin().read_line(&mut cuts).unwrap();
    println!("What is the number of dimensions you want to use?");
    io::stdin().read_line(&mut dimensions).unwrap();
-   println!("The answer to the hypercake problem with {} cuts and {} dimensions is {}",cuts,dimensions,hypercake(cuts.parse().unwrap(), dimensions.parse().unwrap()));
+   let cutsTrim = cuts.trim();
+   let dimensionsTrim = dimensions.trim();
+   let res = hypercake(cutsTrim.parse().unwrap(), dimensionsTrim.parse().unwrap());
+   println!("The answer to the hypercake problem with {} cuts and {} dimensions is {}.C",cutsTrim,dimensionsTrim,res);
 }
 
 
