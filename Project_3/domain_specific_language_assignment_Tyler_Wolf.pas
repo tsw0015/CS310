@@ -1,43 +1,52 @@
-
-
-
-Program Combinations;
- 
-const
- m_max = 3;
- n_max = 5;
-var
- combination: array [0..m_max] of integer;
- 
- procedure generate(m: integer);
-  var
-   n, i: integer;
-  begin
-   if (m > m_max) then
-    begin
-    for i := 1 to m_max do
-     write (combination[i], ' ');
-    writeln;
-    end
-   else
-    for n := 1 to n_max do
-     if ((m = 1) or (n > combination[m-1])) then
-      begin
-       combination[m] := n;
-       generate(m + 1);
-      end;
-   end; 
- 
-begin
- generate(1);
-end.
+(*Unit 3  Domain Specific Language Portion of Assignment for Tyler Wolf
+    I acknowledge and agree to the acedemic integrity policy.*)
+Program domain_specific_language_assignment_Tyler_Wolf;
+uses Crt,sysutils;
+var 
+   cuts : char;
+   dimensions : char;
 
 function factorial(n: integer): integer;
- var
-  i, result: integer;
- begin
-  result := 1;
-  for i := 2 to n do
-   result := result * i;
-  factorial := result
- end;
+   var
+  result: integer;
+begin
+   if(n = 0) then
+      result := 1
+   else  
+      result := n * factorial(n-1);
+   factorial := result;
+end;
+
+function combinations(n: integer; r: integer): integer;
+var
+   result: integer;
+begin
+   if(r >= 0) and (r <= n) then
+      result := integer(Trunc(factorial(n)/(factorial(r)*factorial(n-r))))
+   else
+      result := 0;
+   writeln(result);
+   combinations:=result;
+end;
+
+function hypercake(n: integer; k: integer): integer;
+var
+   result: integer;
+begin
+   if(k = 0) then
+      result:=combinations(n,k)
+   else  
+      result:=combinations(n,k) + hypercake(n, k-1);
+   hypercake:=result;
+end;
+
+
+
+begin
+writeln('What is the number of cuts you want to use?');
+cuts:=readkey;
+writeln('What is the number of dimensions you want to use?');
+dimensions:=readkey;
+
+writeln('The answer to the hypercake problem with ' + ShortString(cuts) + ' cuts and ' + ShortString(dimensions) + ' dimensions is ' + ShortString(IntToStr(hypercake(integer(cuts), integer(dimensions)))));
+end.
